@@ -1,5 +1,6 @@
 import { useImperativeHandle, useRef, type Ref, type ReactNode } from "react";
 import { createPortal } from "react-dom";
+import styles from "./Modal.module.css";
 
 export type ModalHandle = {
   open: () => void;
@@ -32,12 +33,16 @@ export default function Modal({
   if (!modalRoot) return null;
 
   return createPortal(
-    <dialog ref={dialog}>
+    <dialog ref={dialog} className={styles.modal}>
       {children}
-      <form method="dialog">
-        <button>{buttonCaption}</button>
-      </form>
-      <button onClick={actionHandle}>{actionBtnCaption}</button>
+      <div className={styles.modalBtnsWrapper}>
+        <form method="dialog">
+          <button className={styles.cancelBtn}>{buttonCaption}</button>
+        </form>
+        <button onClick={actionHandle} className={styles.removeBtn}>
+          {actionBtnCaption}
+        </button>
+      </div>
     </dialog>,
     modalRoot,
   );
