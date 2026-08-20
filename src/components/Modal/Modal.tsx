@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 
 export type ModalHandle = {
   open: () => void;
+  close: () => void;
 };
 
 type ModalProps = {
@@ -24,6 +25,7 @@ export default function Modal({
 
   useImperativeHandle(ref, () => ({
     open: () => dialog.current?.showModal(),
+    close: () => dialog.current?.close(),
   }));
 
   const modalRoot = document.getElementById("modal-root");
