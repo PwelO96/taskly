@@ -13,7 +13,7 @@ export default function TodoFooter({ text }: FooterProps) {
   return (
     <p className={styles.todoFooter}>
       {text}
-      <span className={styles.leftNumber}>{remainingTodos}</span>
+      <span className={styles.leftNumber}> {remainingTodos}</span>
     </p>
   );
 }

@@ -19,7 +19,7 @@ export default function TodoItem({
 
   return (
     <li className={styles.todoItem}>
-      <div className={styles.todoContent}>
+      <label className={styles.todoContent}>
         <input
           type="checkbox"
           checked={isChecked}
@@ -29,7 +29,7 @@ export default function TodoItem({
         <span className={isChecked ? styles.todoChecked : styles.todoText}>
           {text}
         </span>
-      </div>
+      </label>
       <button className={styles.btnDelete} onClick={onRequestDelete}>
         🗑️
       </button>

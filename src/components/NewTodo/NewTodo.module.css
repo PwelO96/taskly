@@ -19,8 +19,18 @@
   font-size: 1rem;
   outline: none;
   transition: border-color 0.2s;
-  background-color: #ddd;
+  background-color: white;
   color: #333;
+}
+
+.todoPriority {
+  padding: 10px 8px;
+  border: 1px solid #cacaca;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
 }
 
 .btnAdd {

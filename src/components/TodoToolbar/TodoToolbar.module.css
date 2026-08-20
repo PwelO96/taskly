@@ -1,0 +1,15 @@
+.todoToolbar {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.todoSort {
+  padding: 9px 10px;
+  border: 1px solid #cacaca;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+}

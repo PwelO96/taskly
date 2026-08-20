@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import styles from "./NewTodo.module.css";
 import { useTodos } from "../../hooks/useTodos";
+import Input from "../UI/Input";
 
 type FormInputs = {
   taskName: string;
@@ -24,7 +25,7 @@ export default function NewTodo() {
   return (
     <form className={styles.todoForm} onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.inputWrapper}>
-        <input
+        <Input
           type="text"
           placeholder="Type new task..."
           className={styles.todoInput}
@@ -35,7 +36,12 @@ export default function NewTodo() {
               message: "Task must be at least 3 characters length.",
             },
           })}
-        ></input>
+        />
+        <select className={styles.todoPriority}>
+          <option value="3">🔴</option>
+          <option value="2">🟠</option>
+          <option value="1">🟢</option>
+        </select>
         <button type="submit" disabled={isSubmitting} className={styles.btnAdd}>
           {isSubmitting ? "Adding..." : "Add"}
         </button>
