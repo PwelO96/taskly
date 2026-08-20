@@ -1,0 +1,43 @@
+.todoItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.todoContent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.btnDelete {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.todoCheckbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.todoText {
+  font-size: 0.95rem;
+  color: #333;
+  transition:
+    color 0.2s,
+    text-decoration 0.2s;
+}
+
+.todoChecked {
+  text-decoration: line-through;
+  color: #aaa;
+}
