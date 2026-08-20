@@ -1,0 +1,10 @@
+.todoFooter {
+  margin-top: 15px;
+  font-size: 0.85rem;
+  color: #666;
+  text-align: right;
+}
+
+.leftNumber {
+  font-weight: 700;
+}
