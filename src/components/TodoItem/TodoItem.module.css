@@ -13,11 +13,54 @@
   flex: 1;
 }
 
+.todoTextWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.taskDetailsWrapper {
+  display: flex;
+  gap: 8px;
+  flex-direction: row;
+}
+
+.badge {
+  padding: 1px 7px;
+  border-radius: 99px;
+  font-size: 0.57rem;
+  font-weight: 700;
+  letter-spacing: 0.03rem;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.badgeLow {
+  background-color: #52b0a0;
+}
+
+.badgeMid {
+  background-color: #e0a052;
+}
+
+.badgeHigh {
+  background-color: #e05252;
+}
+
+.dueDate {
+  font-size: 0.72rem;
+  color: #7a828c;
+}
+
+.overdue {
+  color: #e05252;
+}
+
 .btnDelete {
   background: transparent;
   border: none;
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 1rem;
   padding: 4px 8px;
   border-radius: 4px;
   transition: background-color 0.2s;
@@ -37,14 +80,14 @@
 }
 
 .todoCheckbox:checked {
-  background-color: #ffffff;
+  background-color: #4a90e2;
 }
 
 .todoCheckbox:checked::before {
   content: "";
   width: 0.6rem;
   height: 0.6rem;
-  background-color: #1a1a1a;
+  background-color: white;
   clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
 }
 

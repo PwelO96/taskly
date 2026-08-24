@@ -13,7 +13,10 @@ export default function TodoPage() {
         <TodoToolbar />
         <NewTodo />
         <TodoList />
-        <TodoFooter text="Pozostało zadań do zrobienia:" />
+        <TodoFooter
+          text="Pozostało zadań do zrobienia:"
+          text2="Usuń zrobione "
+        />
       </div>
     </section>
   );

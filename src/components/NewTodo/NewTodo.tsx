@@ -5,6 +5,8 @@ import Input from "../UI/Input";
 
 type FormInputs = {
   taskName: string;
+  priority: string;
+  dueDate: string;
 };
 
 export default function NewTodo() {
@@ -17,8 +19,14 @@ export default function NewTodo() {
     formState: { errors, isSubmitting },
   } = useForm<FormInputs>();
 
+  const errorMessages = Object.values(errors);
+
   const onSubmit = (data: FormInputs) => {
-    addTodo(data.taskName);
+    addTodo({
+      text: data.taskName,
+      priority: data.priority,
+      dueDate: data.dueDate,
+    });
     reset();
   };
 
@@ -37,17 +45,40 @@ export default function NewTodo() {
             },
           })}
         />
-        <select className={styles.todoPriority}>
-          <option value="3">🔴</option>
-          <option value="2">🟠</option>
-          <option value="1">🟢</option>
-        </select>
-        <button type="submit" disabled={isSubmitting} className={styles.btnAdd}>
-          {isSubmitting ? "Adding..." : "Add"}
-        </button>
+        <div className={styles.inputBottomWrapper}>
+          <select className={styles.todoPriority} {...register("priority")}>
+            <option value="low">🟢</option>
+            <option value="medium">🟠</option>
+            <option value="high">🔴</option>
+          </select>
+          <Input
+            type="date"
+            className={styles.todoDate}
+            {...register("dueDate", {
+              required: "Date is required",
+              validate: (value) =>
+                !value ||
+                value >= new Date().toISOString().slice(0, 10) ||
+                "Data nie może być w przeszłości",
+            })}
+          />
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className={styles.btnAdd}
+          >
+            {isSubmitting ? "Adding..." : "Add"}
+          </button>
+        </div>
       </div>
-      {errors.taskName && (
-        <div className={styles.error}>{errors.taskName.message}</div>
+      {errorMessages && (
+        <div className={styles.error}>
+          <ul>
+            {errorMessages.map((error) => (
+              <li key={error.message}>{error.message}</li>
+            ))}
+          </ul>
+        </div>
       )}
     </form>
   );

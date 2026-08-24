@@ -1,10 +1,23 @@
-.todoFooter {
+.todoFooter,
+.todoFooterDelete {
   margin-top: 15px;
   font-size: 0.85rem;
   color: #666;
   text-align: right;
 }
 
+.todoFooterDelete {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .leftNumber {
   font-weight: 700;
+}
+
+.footerWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: space-between;
 }

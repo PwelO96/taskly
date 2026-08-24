@@ -8,7 +8,14 @@
 .inputWrapper {
   display: flex;
   gap: 10px;
+  flex-direction: column;
+  width: 100%;
+}
+
+.inputBottomWrapper {
+  display: flex;
   flex-direction: row;
+  gap: 10px;
 }
 
 .todoInput {
@@ -30,6 +37,13 @@
   font-size: 0.95rem;
   background: #fff;
   color: #333;
+  cursor: pointer;
+}
+
+.todoDate::-webkit-calendar-picker-indicator {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a90e2' stroke-width='2'><rect x='3' y='5' width='18' height='16' rx='2'/><path d='M8 3v4M16 3v4M3 11h18'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
   cursor: pointer;
 }
 

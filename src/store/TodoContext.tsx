@@ -3,14 +3,19 @@ import { createContext, useEffect, useState, type ReactNode } from "react";
 export type Todo = {
   id: string;
   text: string;
+  priority: string;
+  dueDate: string;
   isChecked: boolean;
 };
 
+export type NewTodo = Omit<Todo, "id" | "isChecked">;
+
 type TodoContextType = {
   todos: Todo[];
-  addTodo: (text: string) => void;
+  addTodo: (data: NewTodo) => void;
   updateTodo: (id: string) => void;
   removeTodo: (id: string) => void;
+  removeCheckedTodos: () => void;
 };
 
 export const TodoContext = createContext<TodoContextType | null>(null);
@@ -25,9 +30,12 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
-  const addTodo = (text: string) => {
+  const addTodo = ({ text, priority, dueDate }: NewTodo) => {
     const id = new Date().toString();
-    setTodos((prevTodo) => [...prevTodo, { id: id, text, isChecked: false }]);
+    setTodos((prevTodo) => [
+      ...prevTodo,
+      { id: id, text, priority, dueDate, isChecked: false },
+    ]);
   };
 
   const updateTodo = (id: string) => {
@@ -42,11 +50,16 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   };
 
+  const removeCheckedTodos = () => {
+    setTodos((prevTodos) => prevTodos.filter((todo) => !todo.isChecked));
+  };
+
   const TodoCtx = {
     todos,
     addTodo,
     updateTodo,
     removeTodo,
+    removeCheckedTodos,
   };
 
   return <TodoContext value={TodoCtx}>{children}</TodoContext>;
