@@ -102,4 +102,5 @@
 .todoChecked {
   text-decoration: line-through;
   color: #aaa;
+  font-size: 0.95rem;
 }
