@@ -8,4 +8,5 @@
   transition: border-color 0.2s;
   background-color: white;
   color: #333;
+  box-sizing: border-box;
 }
