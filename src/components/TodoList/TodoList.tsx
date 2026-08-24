@@ -4,11 +4,14 @@ import { useTodos } from "../../hooks/useTodos";
 import Modal, { type ModalHandle } from "../Modal/Modal";
 import { useRef, useState } from "react";
 import type { Todo } from "../../store/TodoContext";
+import EmptyTodoList from "../EmptyTodoList/EmptyTodoList";
 
 export default function TodoList() {
   const modal = useRef<ModalHandle>(null);
   const { todos, removeTodo } = useTodos();
   const [todoToDelete, setTodoToDelete] = useState<Todo | null>(null);
+
+  const isTodosExist = todos.length === 0;
 
   const modalHandler = () => {
     modal.current?.open();
@@ -19,6 +22,8 @@ export default function TodoList() {
     setTodoToDelete(null);
     modal.current?.close();
   };
+
+  if (isTodosExist) return <EmptyTodoList />;
 
   return (
     <>

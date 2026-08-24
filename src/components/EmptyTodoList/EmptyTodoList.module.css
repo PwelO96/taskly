@@ -1,0 +1,17 @@
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  color: #7a828c;
+  gap: 0.5rem;
+  flex-direction: column;
+}
+
+.emptyState p {
+  font-size: 0.9rem;
+}
+
+.icon {
+  font-size: 2rem;
+}

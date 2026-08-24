@@ -13,6 +13,8 @@ export default function TodoFooter({ text, text2 }: FooterProps) {
   const modal = useRef<ModalHandle>(null);
   const { todos, removeCheckedTodos } = useTodos();
 
+  const isTodosExist = todos.length === 0;
+
   const remainingTodos = todos.filter((todo) => !todo.isChecked).length;
   const checkedTodos = todos.filter((todo) => todo.isChecked).length;
 
@@ -27,6 +29,8 @@ export default function TodoFooter({ text, text2 }: FooterProps) {
     removeCheckedTodos();
     modal.current?.close();
   };
+
+  if (isTodosExist) return;
 
   return (
     <>
