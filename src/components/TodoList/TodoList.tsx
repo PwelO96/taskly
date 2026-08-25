@@ -8,6 +8,7 @@ import EmptyTodoList from "../EmptyTodoList/EmptyTodoList";
 
 type TodoListProps = {
   sortBy: SortBy;
+  searchQuery: string;
 };
 
 const priorityWeights: Record<string, number> = {
@@ -16,7 +17,7 @@ const priorityWeights: Record<string, number> = {
   high: 2,
 };
 
-export default function TodoList({ sortBy }: TodoListProps) {
+export default function TodoList({ sortBy, searchQuery }: TodoListProps) {
   const modal = useRef<ModalHandle>(null);
   const { todos, removeTodo } = useTodos();
   const [todoToDelete, setTodoToDelete] = useState<Todo | null>(null);
@@ -33,20 +34,24 @@ export default function TodoList({ sortBy }: TodoListProps) {
     modal.current?.close();
   };
 
-  const sortTodos = () => {
-    const sortedTodos = [...todos];
+  const visibleTodos = () => {
+    const query = searchQuery.trim().toLowerCase();
+
+    const filteredData = query
+      ? todos.filter((el) => el.text.trim().toLowerCase().includes(query))
+      : todos;
 
     if (sortBy === "priority") {
-      sortedTodos.sort(
+      filteredData.sort(
         (a, b) => priorityWeights[a.priority] - priorityWeights[b.priority],
       );
     } else if (sortBy === "dueDate") {
-      sortedTodos.sort((a, b) => a.dueDate.localeCompare(b.dueDate));
+      filteredData.sort((a, b) => a.dueDate.localeCompare(b.dueDate));
     } else if (sortBy === "newest") {
-      sortedTodos.sort((a, b) => b.createdDate - a.createdDate);
+      filteredData.sort((a, b) => b.createdDate - a.createdDate);
     }
 
-    return sortedTodos;
+    return filteredData;
   };
 
   if (isTodosExist) return <EmptyTodoList />;
@@ -64,7 +69,7 @@ export default function TodoList({ sortBy }: TodoListProps) {
         <p>Are you sure you want to delete {todoToDelete?.text}</p>
       </Modal>
       <ul className={styles.todoList}>
-        {sortTodos().map((todo) => (
+        {visibleTodos().map((todo) => (
           <TodoItem
             key={todo.id}
             todo={todo}

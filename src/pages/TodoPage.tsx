@@ -9,16 +9,23 @@ import type { SortBy } from "../types/todo";
 
 export default function TodoPage() {
   const [sortBy, setSortBy] = useState<SortBy>("newest");
+  const [searchQuery, setSearchQuery] = useState("");
+
   return (
     <section className={styles.todoSection}>
       <div className={styles.todoContainer}>
         <Header text="📝 My Task List" />
-        <TodoToolbar sortBy={sortBy} onSortChange={setSortBy} />
+        <TodoToolbar
+          sortBy={sortBy}
+          onSortChange={setSortBy}
+          searchQuery={searchQuery}
+          onSerachChange={setSearchQuery}
+        />
         <NewTodo />
-        <TodoList sortBy={sortBy} />
+        <TodoList sortBy={sortBy} searchQuery={searchQuery} />
         <TodoFooter
           text="Pozostało zadań do zrobienia:"
-          text2="Usuń zrobione "
+          deleteAlltext="Usuń zrobione "
         />
       </div>
     </section>
