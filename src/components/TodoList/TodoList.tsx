@@ -3,12 +3,13 @@ import TodoItem from "../TodoItem/TodoItem";
 import { useTodos } from "../../hooks/useTodos";
 import Modal, { type ModalHandle } from "../Modal/Modal";
 import { useRef, useState } from "react";
-import type { Todo, SortBy } from "../../types/todo";
+import type { Todo, SortBy, StatusFilter } from "../../types/todo";
 import EmptyTodoList from "../EmptyTodoList/EmptyTodoList";
 
 type TodoListProps = {
   sortBy: SortBy;
   searchQuery: string;
+  statusFilter: StatusFilter;
 };
 
 const priorityWeights: Record<string, number> = {
@@ -17,7 +18,11 @@ const priorityWeights: Record<string, number> = {
   high: 2,
 };
 
-export default function TodoList({ sortBy, searchQuery }: TodoListProps) {
+export default function TodoList({
+  sortBy,
+  searchQuery,
+  statusFilter,
+}: TodoListProps) {
   const modal = useRef<ModalHandle>(null);
   const { todos, removeTodo } = useTodos();
   const [todoToDelete, setTodoToDelete] = useState<Todo | null>(null);
@@ -40,6 +45,11 @@ export default function TodoList({ sortBy, searchQuery }: TodoListProps) {
     const filteredData = query
       ? todos.filter((el) => el.text.trim().toLowerCase().includes(query))
       : todos;
+
+    if (statusFilter === "active")
+      return filteredData.filter((el) => !el.isChecked);
+    if (statusFilter === "done")
+      return filteredData.filter((el) => el.isChecked);
 
     if (sortBy === "priority") {
       filteredData.sort(

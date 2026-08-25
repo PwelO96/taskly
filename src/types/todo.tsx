@@ -10,3 +10,5 @@ export type Todo = {
 export type NewTodo = Omit<Todo, "id" | "isChecked" | "createdDate">;
 
 export type SortBy = "newest" | "priority" | "dueDate";
+
+export type StatusFilter = "all" | "active" | "done";
