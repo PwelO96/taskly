@@ -1,6 +1,6 @@
 import { useTodos } from "../../hooks/useTodos";
 import styles from "./TodoItem.module.css";
-import type { Todo } from "../../store/TodoContext";
+import type { Todo } from "../../types/todo";
 import { formatDueDate, isOverdue } from "../../utils/date";
 
 type TodoItemProps = {

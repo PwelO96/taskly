@@ -1,14 +1,5 @@
 import { createContext, useEffect, useState, type ReactNode } from "react";
-
-export type Todo = {
-  id: string;
-  text: string;
-  priority: string;
-  dueDate: string;
-  isChecked: boolean;
-};
-
-export type NewTodo = Omit<Todo, "id" | "isChecked">;
+import type { Todo, NewTodo } from "../types/todo";
 
 type TodoContextType = {
   todos: Todo[];
@@ -31,10 +22,19 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
   }, [todos]);
 
   const addTodo = ({ text, priority, dueDate }: NewTodo) => {
-    const id = new Date().toString();
+    const id = crypto.randomUUID();
+    const currentDate = new Date().getTime();
+
     setTodos((prevTodo) => [
       ...prevTodo,
-      { id: id, text, priority, dueDate, isChecked: false },
+      {
+        id: id,
+        text,
+        priority,
+        dueDate,
+        isChecked: false,
+        createdDate: currentDate,
+      },
     ]);
   };
 
