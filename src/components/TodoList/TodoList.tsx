@@ -10,16 +10,16 @@ type TodoListProps = {
   sortBy: SortBy;
 };
 
+const priorityWeights: Record<string, number> = {
+  low: 0,
+  medium: 1,
+  high: 2,
+};
+
 export default function TodoList({ sortBy }: TodoListProps) {
   const modal = useRef<ModalHandle>(null);
   const { todos, removeTodo } = useTodos();
   const [todoToDelete, setTodoToDelete] = useState<Todo | null>(null);
-
-  const priorityWeights: Record<string, number> = {
-    low: 0,
-    medium: 1,
-    high: 2,
-  };
 
   const isTodosExist = todos.length === 0;
 
