@@ -39,29 +39,32 @@ export default function TodoList({
     modal.current?.close();
   };
 
+  const query = searchQuery.trim().toLowerCase();
+
+  const searched = query
+    ? todos.filter((el) => el.text.trim().toLowerCase().includes(query))
+    : todos;
+
+  const filtered =
+    statusFilter === "active"
+      ? searched.filter((el) => !el.isChecked)
+      : statusFilter === "done"
+        ? searched.filter((el) => el.isChecked)
+        : searched;
+
   const visibleTodos = () => {
-    const query = searchQuery.trim().toLowerCase();
-
-    const filteredData = query
-      ? todos.filter((el) => el.text.trim().toLowerCase().includes(query))
-      : todos;
-
-    if (statusFilter === "active")
-      return filteredData.filter((el) => !el.isChecked);
-    if (statusFilter === "done")
-      return filteredData.filter((el) => el.isChecked);
-
+    const sorted = [...filtered];
     if (sortBy === "priority") {
-      filteredData.sort(
+      sorted.sort(
         (a, b) => priorityWeights[a.priority] - priorityWeights[b.priority],
       );
     } else if (sortBy === "dueDate") {
-      filteredData.sort((a, b) => a.dueDate.localeCompare(b.dueDate));
+      sorted.sort((a, b) => a.dueDate.localeCompare(b.dueDate));
     } else if (sortBy === "newest") {
-      filteredData.sort((a, b) => b.createdDate - a.createdDate);
+      sorted.sort((a, b) => b.createdDate - a.createdDate);
     }
 
-    return filteredData;
+    return sorted;
   };
 
   if (isTodosExist) return <EmptyTodoList />;
