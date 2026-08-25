@@ -1,7 +1,6 @@
 import { useTodos } from "../../hooks/useTodos";
 import styles from "./TodoFooter.module.css";
 import Modal, { type ModalHandle } from "../Modal/Modal";
-import { createPortal } from "react-dom";
 import { useRef } from "react";
 
 type FooterProps = {
@@ -18,9 +17,6 @@ export default function TodoFooter({ text, text2 }: FooterProps) {
   const remainingTodos = todos.filter((todo) => !todo.isChecked).length;
   const checkedTodos = todos.filter((todo) => todo.isChecked).length;
 
-  const modalContainer = document.getElementById("modal-root");
-  if (!modalContainer) return null;
-
   const modalHandler = () => {
     modal.current?.open();
   };
@@ -34,17 +30,14 @@ export default function TodoFooter({ text, text2 }: FooterProps) {
 
   return (
     <>
-      {createPortal(
-        <Modal
-          ref={modal}
-          buttonCaption="Close"
-          actionBtnCaption="Remove"
-          actionHandle={removeHandler}
-        >
-          Are you sure you want to delete all finished tasks?
-        </Modal>,
-        modalContainer,
-      )}
+      <Modal
+        ref={modal}
+        buttonCaption="Close"
+        actionBtnCaption="Remove"
+        actionHandle={removeHandler}
+      >
+        Are you sure you want to delete all finished tasks?
+      </Modal>
 
       <div className={styles.footerWrapper}>
         <p className={styles.todoFooter}>
