@@ -71,7 +71,7 @@ export default function NewTodo() {
           </button>
         </div>
       </div>
-      {errorMessages && (
+      {errorMessages.length > 0 && (
         <div className={styles.error}>
           <ul>
             {errorMessages.map((error) => (
