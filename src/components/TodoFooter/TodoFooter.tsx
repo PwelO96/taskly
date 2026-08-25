@@ -5,10 +5,10 @@ import { useRef } from "react";
 
 type FooterProps = {
   text: string;
-  text2: string;
+  deleteAlltext: string;
 };
 
-export default function TodoFooter({ text, text2 }: FooterProps) {
+export default function TodoFooter({ text, deleteAlltext }: FooterProps) {
   const modal = useRef<ModalHandle>(null);
   const { todos, removeCheckedTodos } = useTodos();
 
@@ -46,7 +46,7 @@ export default function TodoFooter({ text, text2 }: FooterProps) {
         </p>
         {checkedTodos >= 1 && (
           <p onClick={modalHandler} className={styles.todoFooterDelete}>
-            {text2}
+            {deleteAlltext}
             <span>{`(${checkedTodos})`}</span>
           </p>
         )}
