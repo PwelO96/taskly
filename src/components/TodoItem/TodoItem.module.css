@@ -62,16 +62,6 @@
   color: #e05252;
 }
 
-.btnDelete {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-}
-
 .todoCheckbox {
   appearance: none;
   width: 1.15rem;

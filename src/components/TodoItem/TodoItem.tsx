@@ -4,6 +4,7 @@ import type { Todo } from "../../types/todo";
 import { formatDueDate, isOverdue } from "../../utils/date";
 import { useState } from "react";
 import Input from "../UI/Input";
+import IconButton from "../UI/IconButton";
 
 type TodoItemProps = {
   todo: Todo;
@@ -87,40 +88,27 @@ export default function TodoItem({
       <div className={styles.todoActions}>
         {taskEdit ? (
           <div>
-            <button
-              title="Ok"
-              className={styles.btnDelete}
-              onClick={taskApproveEdit}
-            >
+            <IconButton title="Ok" onClick={taskApproveEdit}>
               ✔️
-            </button>
-            <button
-              title="Cancel"
-              className={styles.btnDelete}
-              onClick={taskCancelEdit}
-            >
+            </IconButton>
+            <IconButton title="Cancel" onClick={taskCancelEdit}>
               ❌
-            </button>
+            </IconButton>
           </div>
         ) : (
           <div>
-            <button
+            <IconButton
               title="Edit"
-              className={styles.btnDelete}
               onClick={() => {
                 setDraftText(text);
                 setTaskEdit(true);
               }}
             >
               ✏️
-            </button>
-            <button
-              title="Delete"
-              className={styles.btnDelete}
-              onClick={onRequestDelete}
-            >
+            </IconButton>
+            <IconButton title="Delete" onClick={onRequestDelete}>
               🗑️
-            </button>
+            </IconButton>
           </div>
         )}
       </div>
