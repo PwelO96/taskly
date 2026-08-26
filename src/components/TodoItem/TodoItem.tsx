@@ -18,7 +18,7 @@ export default function TodoItem({
   todo: { text, id, isChecked, priority, dueDate },
   onRequestDelete,
 }: TodoItemProps) {
-  const { updateTodo } = useTodos();
+  const { toggleTodo } = useTodos();
 
   const overdue = dueDate !== "" && !isChecked && isOverdue(dueDate);
 
@@ -29,7 +29,7 @@ export default function TodoItem({
           type="checkbox"
           checked={isChecked}
           className={styles.todoCheckbox}
-          onChange={() => updateTodo(id)}
+          onChange={() => toggleTodo(id)}
         />
         <div className={styles.todoTextWrapper}>
           <span className={isChecked ? styles.todoChecked : styles.todoText}>

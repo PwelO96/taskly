@@ -4,7 +4,7 @@ import type { Todo, NewTodo } from "../types/todo";
 type TodoContextType = {
   todos: Todo[];
   addTodo: (data: NewTodo) => void;
-  updateTodo: (id: string) => void;
+  toggleTodo: (id: string) => void;
   removeTodo: (id: string) => void;
   removeCheckedTodos: () => void;
 };
@@ -38,7 +38,7 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
     ]);
   };
 
-  const updateTodo = (id: string) => {
+  const toggleTodo = (id: string) => {
     setTodos((prevTodos) =>
       prevTodos.map((todo) =>
         todo.id === id ? { ...todo, isChecked: !todo.isChecked } : todo,
@@ -57,7 +57,7 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
   const TodoCtx = {
     todos,
     addTodo,
-    updateTodo,
+    toggleTodo,
     removeTodo,
     removeCheckedTodos,
   };
