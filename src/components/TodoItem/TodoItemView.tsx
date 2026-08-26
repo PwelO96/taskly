@@ -3,10 +3,10 @@ import IconButton from "../UI/IconButton";
 import type { Todo } from "../../types/todo";
 import { formatDueDate, isOverdue } from "../../utils/date";
 
-type TodoItemsViewProps = {
+type TodoItemViewProps = {
   onEdit: () => void;
   onDelete: () => void;
-  onToggle: (id: string) => void;
+  onToggle: () => void;
   todo: Todo;
 };
 
@@ -16,12 +16,12 @@ const badgeStyles: Record<string, string> = {
   high: styles.badgeHigh,
 };
 
-export default function TodoItemsView({
+export default function TodoItemView({
   onEdit,
   onDelete,
   onToggle,
   todo,
-}: TodoItemsViewProps) {
+}: TodoItemViewProps) {
   const overdue =
     todo.dueDate !== "" && !todo.isChecked && isOverdue(todo.dueDate);
   return (
@@ -31,7 +31,7 @@ export default function TodoItemsView({
           type="checkbox"
           checked={todo.isChecked}
           className={styles.todoCheckbox}
-          onChange={() => onToggle(todo.id)}
+          onChange={onToggle}
         />
         <div className={styles.todoTextWrapper}>
           <span
@@ -54,14 +54,12 @@ export default function TodoItemsView({
         </div>
       </label>
       <div className={styles.todoActions}>
-        <div>
-          <IconButton title="Edit" onClick={onEdit}>
-            ✏️
-          </IconButton>
-          <IconButton title="Delete" onClick={onDelete}>
-            🗑️
-          </IconButton>
-        </div>
+        <IconButton title="Edit" onClick={onEdit}>
+          ✏️
+        </IconButton>
+        <IconButton title="Delete" variant="danger" onClick={onDelete}>
+          🗑️
+        </IconButton>
       </div>
     </>
   );

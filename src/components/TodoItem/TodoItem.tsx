@@ -3,7 +3,7 @@ import styles from "./TodoItem.module.css";
 import type { Todo } from "../../types/todo";
 import { useState } from "react";
 import TodoItemEdit from "./TodoItemEdit";
-import TodoItemsView from "./TodoItemView";
+import TodoItemView from "./TodoItemView";
 
 type TodoItemProps = {
   todo: Todo;
@@ -12,24 +12,17 @@ type TodoItemProps = {
 
 export default function TodoItem({ todo, onRequestDelete }: TodoItemProps) {
   const { toggleTodo, editTodo } = useTodos();
-  const [taskEdit, setTaskEdit] = useState(false);
-  const [draftText, setDraftText] = useState(todo.text);
+  const [draft, setDraft] = useState<string | null>(null);
 
-  const startEdit = () => {
-    setDraftText(todo.text);
-    setTaskEdit(true);
-  };
+  const startEdit = () => setDraft(todo.text);
 
-  const taskCancelEdit = () => {
-    setDraftText(todo.text);
-    setTaskEdit(false);
-  };
+  const taskCancelEdit = () => setDraft(null);
 
   const taskApproveEdit = () => {
-    const trimmed = draftText.trim();
+    const trimmed = draft?.trim();
     if (!trimmed) return;
     editTodo(todo.id, trimmed);
-    setTaskEdit(false);
+    setDraft(null);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -41,16 +34,16 @@ export default function TodoItem({ todo, onRequestDelete }: TodoItemProps) {
 
   return (
     <li className={styles.todoItem}>
-      {taskEdit ? (
+      {draft !== null ? (
         <TodoItemEdit
-          draftText={draftText}
-          handleKeyDown={handleKeyDown}
+          draftText={draft}
+          onKeyDown={handleKeyDown}
           onEditApprove={taskApproveEdit}
           onCancel={taskCancelEdit}
-          onDraftChange={setDraftText}
+          onDraftChange={setDraft}
         />
       ) : (
-        <TodoItemsView
+        <TodoItemView
           todo={todo}
           onEdit={startEdit}
           onDelete={onRequestDelete}

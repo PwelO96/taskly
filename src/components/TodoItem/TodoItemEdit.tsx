@@ -4,15 +4,15 @@ import IconButton from "../UI/IconButton";
 
 type TodoItemEditProps = {
   draftText: string;
-  handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   onEditApprove: () => void;
   onCancel: () => void;
-  onDraftChange: (e: string) => void;
+  onDraftChange: (value: string) => void;
 };
 
 export default function TodoItemEdit({
   draftText,
-  handleKeyDown,
+  onKeyDown,
   onEditApprove,
   onCancel,
   onDraftChange,
@@ -23,18 +23,17 @@ export default function TodoItemEdit({
         type="text"
         value={draftText}
         onChange={(e) => onDraftChange(e.target.value)}
-        onKeyDown={handleKeyDown}
+        onKeyDown={onKeyDown}
+        aria-label="Edit task"
         autoFocus
       />
       <div className={styles.todoActions}>
-        <div>
-          <IconButton title="Ok" onClick={onEditApprove}>
-            ✔️
-          </IconButton>
-          <IconButton title="Cancel" onClick={onCancel}>
-            ❌
-          </IconButton>
-        </div>
+        <IconButton title="Ok" onClick={onEditApprove}>
+          ✔️
+        </IconButton>
+        <IconButton title="Cancel" onClick={onCancel}>
+          ❌
+        </IconButton>
       </div>
     </>
   );
