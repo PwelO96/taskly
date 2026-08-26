@@ -6,6 +6,12 @@
   border-bottom: 1px solid #eee;
 }
 
+.todoActions {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
 .todoContent {
   display: flex;
   align-items: center;

@@ -5,6 +5,7 @@ type TodoContextType = {
   todos: Todo[];
   addTodo: (data: NewTodo) => void;
   toggleTodo: (id: string) => void;
+  editTodo: (id: string, text: string) => void;
   removeTodo: (id: string) => void;
   removeCheckedTodos: () => void;
 };
@@ -46,6 +47,12 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
+  const editTodo = (id: string, text: string) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) => (todo.id === id ? { ...todo, text } : todo)),
+    );
+  };
+
   const removeTodo = (id: string) => {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   };
@@ -58,6 +65,7 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
     todos,
     addTodo,
     toggleTodo,
+    editTodo,
     removeTodo,
     removeCheckedTodos,
   };
