@@ -53,6 +53,10 @@
   background-color: #e05252;
 }
 
+.badgeDone {
+  opacity: 70%;
+}
+
 .dueDate {
   font-size: 0.72rem;
   color: #7a828c;

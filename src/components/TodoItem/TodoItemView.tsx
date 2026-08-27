@@ -24,6 +24,8 @@ export default function TodoItemView({
 }: TodoItemViewProps) {
   const overdue =
     todo.dueDate !== "" && !todo.isChecked && isOverdue(todo.dueDate);
+  const todoChecked = todo.isChecked;
+
   return (
     <>
       <label className={styles.todoContent}>
@@ -40,10 +42,12 @@ export default function TodoItemView({
             {todo.text}
           </span>
           <div className={styles.taskDetailsWrapper}>
-            <span className={`${styles.badge} ${badgeStyles[todo.priority]}`}>
+            <span
+              className={`${styles.badge} ${badgeStyles[todo.priority]} ${todoChecked ? styles.badgeDone : ""}`}
+            >
               {todo.priority}
             </span>
-            {todo.dueDate && (
+            {(todo.dueDate && todoChecked) || (
               <span
                 className={`${styles.dueDate} ${overdue ? styles.overdue : ""}`}
               >
