@@ -24,7 +24,7 @@ export default function TodoList({
   statusFilter,
 }: TodoListProps) {
   const modal = useRef<ModalHandle>(null);
-  const { todos, removeTodo } = useTodos();
+  const { todos, isLoading, error, removeTodo } = useTodos();
   const [todoToDelete, setTodoToDelete] = useState<Todo | null>(null);
 
   const isTodosExist = todos.length === 0;
@@ -47,9 +47,9 @@ export default function TodoList({
 
   const filtered =
     statusFilter === "active"
-      ? searched.filter((el) => !el.isChecked)
+      ? searched.filter((el) => !el.is_checked)
       : statusFilter === "done"
-        ? searched.filter((el) => el.isChecked)
+        ? searched.filter((el) => el.is_checked)
         : searched;
 
   const visibleTodos = () => {
@@ -59,15 +59,22 @@ export default function TodoList({
         (a, b) => priorityWeights[a.priority] - priorityWeights[b.priority],
       );
     } else if (sortBy === "dueDate") {
-      sorted.sort((a, b) => a.dueDate.localeCompare(b.dueDate));
+      sorted.sort((a, b) => a.due_date.localeCompare(b.due_date));
     } else if (sortBy === "newest") {
-      sorted.sort((a, b) => b.createdDate - a.createdDate);
+      sorted.sort((a, b) => b.created_at - a.created_at);
     }
 
     return sorted;
   };
 
-  if (isTodosExist) return <EmptyTodoList />;
+  if (isLoading) return <p>Tasks loading...</p>;
+  if (error)
+    return (
+      <p className={styles.error}>
+        There is a problem:<br></br> {error}
+      </p>
+    );
+  if (isTodosExist && !isLoading) return <EmptyTodoList />;
 
   return (
     <>

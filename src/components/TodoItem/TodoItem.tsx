@@ -47,7 +47,7 @@ export default function TodoItem({ todo, onRequestDelete }: TodoItemProps) {
           todo={todo}
           onEdit={startEdit}
           onDelete={onRequestDelete}
-          onToggle={() => toggleTodo(todo.id)}
+          onToggle={() => toggleTodo(todo.id, !todo.is_checked)}
         />
       )}
     </li>

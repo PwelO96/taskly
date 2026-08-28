@@ -23,21 +23,21 @@ export default function TodoItemView({
   todo,
 }: TodoItemViewProps) {
   const overdue =
-    todo.dueDate !== "" && !todo.isChecked && isOverdue(todo.dueDate);
-  const todoChecked = todo.isChecked;
+    todo.due_date !== "" && !todo.is_checked && isOverdue(todo.due_date);
+  const todoChecked = todo.is_checked;
 
   return (
     <>
       <label className={styles.todoContent}>
         <input
           type="checkbox"
-          checked={todo.isChecked}
+          checked={todo.is_checked}
           className={styles.todoCheckbox}
           onChange={onToggle}
         />
         <div className={styles.todoTextWrapper}>
           <span
-            className={todo.isChecked ? styles.todoChecked : styles.todoText}
+            className={todo.is_checked ? styles.todoChecked : styles.todoText}
           >
             {todo.text}
           </span>
@@ -47,11 +47,11 @@ export default function TodoItemView({
             >
               {todo.priority}
             </span>
-            {(todo.dueDate && todoChecked) || (
+            {(todo.due_date && todoChecked) || (
               <span
                 className={`${styles.dueDate} ${overdue ? styles.overdue : ""}`}
               >
-                📅 {formatDueDate(todo.dueDate)}
+                📅 {formatDueDate(todo.due_date)}
               </span>
             )}
           </div>

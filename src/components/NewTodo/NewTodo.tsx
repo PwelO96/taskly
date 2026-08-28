@@ -6,7 +6,7 @@ import Input from "../UI/Input";
 type FormInputs = {
   taskName: string;
   priority: string;
-  dueDate: string;
+  due_date: string;
 };
 
 export default function NewTodo() {
@@ -25,7 +25,7 @@ export default function NewTodo() {
     addTodo({
       text: data.taskName,
       priority: data.priority,
-      dueDate: data.dueDate,
+      due_date: data.due_date,
     });
     reset();
   };
@@ -54,7 +54,7 @@ export default function NewTodo() {
           <Input
             type="date"
             className={styles.todoDate}
-            {...register("dueDate", {
+            {...register("due_date", {
               required: "Date is required",
               validate: (value) =>
                 !value ||

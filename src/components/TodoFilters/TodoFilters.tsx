@@ -17,8 +17,8 @@ export default function TodoFilters({
 
   const counts = {
     all: todos.length,
-    active: todos.filter((todo) => !todo.isChecked).length,
-    done: todos.filter((todo) => todo.isChecked).length,
+    active: todos.filter((todo) => !todo.is_checked).length,
+    done: todos.filter((todo) => todo.is_checked).length,
   };
 
   const labels: Record<StatusFilter, string> = {
